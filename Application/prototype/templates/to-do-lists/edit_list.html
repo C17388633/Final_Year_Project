@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit List{% endblock %}
+
+{% block content %}
+    <h1>Edit List</h1>
+    <form method = 'POST'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value = 'Save Changes'><br><br>
+        <p><a class = "linkbutton" href="{% url 'tasks' %}">Cancel</a></p>
+    </form>
+{% endblock %}

@@ -1,0 +1,74 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1>Home</h1>
+    <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#imageCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#imageCarousel" data-slide-to="1"></li>
+            <li data-target="#imageCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <a href="{% url 'schedule' %}">
+                    <img src="{% static 'images/schedule.jpg' %}" class="d-block w-100" alt="Schedule">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h2 class="imageHead">Schedule</h2>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <a href="{% url 'tasks' %}">
+                    <img src="{% static 'images/lists.jpg' %}" class="d-block w-100" alt="To-Do-List">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h2 class="imageHead">To-Do-List</h2>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <a href="{% url 'notes' %}">
+                    <img src="{% static 'images/notes.jpg' %}" class="d-block w-100" alt="Notes">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h2 class="imageHead">Notes</h2>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+    {% if user.is_authenticated %}
+        <br><br><div id="homeLinks">
+            <a class = "linkbutton" href="{% url 'schedule' %}">Schedule</a>
+            <a class = "linkbutton" href="{% url 'tasks' %}">To-Do-Lists</a>
+            <a class = "linkbutton" href="{% url 'notes' %}">Notes</a>
+            <a class = "linkbutton" href="{% url 'settings' %}">Settings</a>
+            <a class = "linkbutton" href="{% url 'logout' %}">Log Out</a>
+        </div>
+        <br><br><p>Welcome {{ user.username }}! The links above will lead you to the other pages of this website. This includes
+            The "Schedule" page will display to you a calendar where you can add events to and add details to. The
+            "To-Do-Lists" page keeps track of all of your tasks that you have. For those tasks that you have marked complete
+            it will be possible to re add them to your list. The "Notes" page holds any extra notes which you may want to keep
+            for the future. I hope our services will assist you with all of your needs.
+        </p>
+
+    {% else %}
+        <br><br><div id="homeLinks">
+            <a class = "linkbutton" href="{% url 'login' %}">Log In</a>
+            <a class = "linkbutton" href="{% url 'signup' %}">Sign Up</a>
+        </div>
+        <br><p>You are not logged in. Please sign in or sign up to make use of Planneroid </p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Notes Search Result{% endblock %}
+
+{% block content %}
+    <h1> Notes Search Result </h1>
+
+    <p><a class = "linkbutton" href="{% url 'notes' %}">View all Notes</a></p>
+    <form action="{% url 'SearchNote' %}" method="get">
+        <label for="note_query" class="short_label"> Note: </label>
+        <input id="note_query" name="note_query" type="text" placeholder="Search note here.." >
+        <button class="FormButton" type="submit" name="button">Search for Note</button>
+    </form>
+    <br><br>
+
+    <h2>Current Notes</h2>
+    {% if not note_list %}
+        There were no notes that matched your search. <br>
+    {% else %}
+        This search has {{ note_list.count }} result(s) <br>
+    {% endif %}
+        {% for note in note_list %}
+            <div class="notes_view">
+                <h3>{{ note.note_title }}</h3>
+                <p>{{ note.note_content }}</p>
+                <div class="NoteLinks">
+                    <a class = "linkbutton" href="{% url 'EditNote' id=note.note_id %}">Edit {{ note.note_title }}</a>
+                    <a class = "linkbutton" href="{% url 'DeleteNote' id=note.note_id %}">Delete {{ note.note_title }}</a>
+                </div>
+            </div>
+        {% endfor %}
+
+    {# A Link to get to the top of the page #}
+    <br><br><a class="linktop" title="To Top of Page" href="#body_div">^</a>
+
+{% endblock %}

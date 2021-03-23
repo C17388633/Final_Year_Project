@@ -1,0 +1,44 @@
+.task_list {
+    width: 400px;
+    max-width: 400px;
+    display: inline-block;
+    border: 1px solid black;
+    background-color: white;
+    padding-left: 1% ;
+    padding-right: 1% ;
+    vertical-align: top;
+    border-radius: 1em;
+}
+.task_view p, h3{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.TaskLinks {
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+}
+
+.ListLinks {
+    text-align: center;
+    margin: auto;
+}
+
+@media (max-width: 450px)
+{
+    .task_list {
+        width: 300px;
+        max-width: 300px;
+        margin: auto;
+    }
+}
+
+@media (max-width: 350px)
+{
+    .task_list {
+        width: 250px;
+        max-width: 250px;
+        margin: auto;
+    }
+}

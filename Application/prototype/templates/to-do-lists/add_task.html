@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Task{% endblock %}
+
+{% block content %}
+    <form method = 'POST'>
+        <h1>Add Task</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value = 'Add Task'><br><br>
+        <p><a class = "linkbutton" href="{% url 'tasks' %}">Cancel</a></p>
+    </form>
+
+
+{% endblock %}

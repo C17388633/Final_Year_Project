@@ -1,0 +1,116 @@
+#skip_nav {
+    position: absolute;
+    transform: translateY(-100%);
+    transition: transform 0.3s;
+    color: #0000FF;
+}
+
+#skip_nav:focus {
+    transform: translateY(0%);
+    background-color: pink;
+}
+
+
+body {
+    background-color: white;
+}
+
+#imageCarousel {
+    margin: auto;
+    width: 50%;
+}
+
+.imageHead {
+    color: #0000FF;
+}
+
+
+.linkbutton {
+    display: inline-block;
+    padding: 10px ;
+    text-align: center;
+    background-color: white;
+    border: 1px solid black;
+    color: #0000FF;
+    border-radius: 1em;
+}
+
+.linktop {
+    display: inline-block;
+    padding: 10px ;
+    text-align: center;
+    background-color: lightgrey;
+    border: 1px solid black;
+    color: black;
+    border-radius: .5em;
+    width: 44px;
+}
+
+#large-screen-nav{
+    display:inline-block;
+    width: 50%;
+    text-align: left;
+}
+
+#large-nav-list {
+    display: inline;
+}
+
+.large-nav-item-options {
+    float:left;
+    display:inline-block;
+    margin-left:2%;
+    margin-right: 2%;
+    padding: 5px;
+}
+
+#homeLinks {
+    text-align: center;
+    margin: auto;
+}
+
+label{
+    display: inline-block;
+    width: 150px;
+}
+
+.short_label{
+    display: inline-block;
+    width: 50px;
+}
+
+input:focus {
+    background-color: pink;
+}
+
+.FormButton:focus {
+    background: pink;
+}
+
+.linkbutton:focus {
+    background: pink;
+    color: #0000AA;
+}
+
+.linktop:focus {
+    background: pink;
+    color: #0000AA;
+}
+
+@media (max-width: 600px)
+{
+    #large-screen-nav{
+        display: none;
+    }
+
+    .navbar-header button {
+        display: block;
+    }
+}
+
+@media (max-width: 400px)
+{
+    #imageCarousel {
+        width: 70%;
+    }
+}

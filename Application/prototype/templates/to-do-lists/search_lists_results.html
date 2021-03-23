@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}Lists Search Result{% endblock %}
+
+{% block content %}
+    <h1> Lists Search Result </h1>
+    <br><br>
+    <p><a class = "linkbutton" href="{% url 'tasks' %}">View Incomplete Tasks</a></p>
+    <p><a class = "linkbutton" href="{% url 'CompletedTasks' %}">View Completed Tasks</a></p>
+
+    {% if lists %}
+        <form action="{% url 'SearchList' %}" method="get">
+            <label for="list_query" class="short_label"> List: </label>
+            <input id="list_query" name="list_query" type="text" placeholder="Search list here.." >
+            <button class="FormButton" type="submit" name="button">Search for List</button>
+        </form>
+        <form action="{% url 'SearchTask' %}" method="get">
+            <label for="task_query" class="short_label"> Task: </label>
+            <input id="task_query" name="task_query" type="text" placeholder="Search task here.." >
+            <button class="FormButton" type="submit" name="button">Search for Task</button>
+        </form>
+        This search has {{ lists.count }} result(s) <br>
+        <br>
+    {% else %}
+        There were no lists that matched your search. <br>
+    {% endif %}
+
+    {% for list in lists %}
+        <div class="task_list">
+            <div class="accordion" id="TaskAccordion">
+                <h2>{{ list.list_title }}</h2><br>
+                {% for task in tasks %}
+                    {% if task.task_list == list %}
+                        <div class="card">
+                            {# adjust colour of headers #}
+                            {% if task.colour == "White (default)" %}
+                                <div class="card-header" id="TaskHead">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                      <h3> {{ task.task_title }}</h3>
+                                    </button>
+                                </div>
+                            {% endif %}
+                            {% if task.colour == "Red" %}
+                                <div class="card-header text-white" id="TaskHead" style="background-color: red">
+                                    <button class="btn btn-link collapsed text-white" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                      <h3> {{ task.task_title }}</h3>
+                                    </button>
+                                </div>
+                            {% endif %}
+                            {% if task.colour == "Blue" %}
+                                <div class="card-header text-white" id="TaskHead" style="background-color: blue">
+                                    <button class="btn btn-link collapsed text-white" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                      <h3> {{ task.task_title }}</h3>
+                                    </button>
+                                </div>
+                            {% endif %}
+                            {% if task.colour == "Yellow" %}
+                                <div class="card-header text-dark" id="TaskHead" style="background-color: yellow">
+                                    <button class="btn btn-link collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                      <h3> {{ task.task_title }}</h3>
+                                    </button>
+                                </div>
+                            {% endif %}
+                            {% if task.colour == "Green" %}
+                                <div class="card-header text-white" id="TaskHead" style="background-color: green">
+                                    <button class="btn btn-link collapsed text-white" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                      <h3> {{ task.task_title }}</h3>
+                                    </button>
+                                </div>
+                            {% endif %}
+                            {% if task.colour == "Purple" %}
+                                <div class="card-header text-white" id="TaskHead" style="background-color: purple">
+                                    <button class="btn btn-link collapsed text-white" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                      <h3> {{ task.task_title }}</h3>
+                                    </button>
+                                </div>
+                            {% endif %}
+                            {% if task.colour == "Orange" %}
+                                <div class="card-header text-dark" id="TaskHead" style="background-color: orange">
+                                    <button class="btn btn-link collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                      <h3> {{ task.task_title }}</h3>
+                                    </button>
+                                </div>
+                            {% endif %}
+                            {% if task.colour == "Pink" %}
+                                <div class="card-header text-dark" id="TaskHead" style="background-color: pink">
+                                    <button class="btn btn-link collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                      <h3> {{ task.task_title }}</h3>
+                                    </button>
+                                </div>
+                            {% endif %}
+
+                            <div id="collapse{{ forloop.counter }}" class="collapse" aria-labelledby="TaskHead" data-parent="#TaskAccordion">
+                                <div class="card-body">
+                                    <p>Description: {{ task.task_description }}</p>
+                                    <p>Time: {{ task.task_datetime }}</p>
+                                    <br>
+                                    <div class="TaskLinks">
+                                        <a class = "linkbutton" href="{% url 'EditTask' id=task.task_id %}">Edit {{ task.task_title }}</a>
+                                        {# show different button depending on its status #}
+                                        {%  if task.complete == 0 %}
+                                            <a class = "linkbutton" href="{% url 'CompleteTask' id=task.task_id %}">Mark {{ task.task_title }} as complete</a>
+                                        {% else %}
+                                            <a class = "linkbutton" href="{% url 'IncompleteTask' id=task.task_id %}">Mark {{ task.task_title }} as incomplete</a>
+                                        {% endif %}
+                                        <a class = "linkbutton" href="{% url 'DeleteTask' id=task.task_id %}">Delete {{ task.task_title }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endif %}
+                {% endfor %}
+                <div class="ListLinks">
+                    <a class = "linkbutton" href="{% url 'EditList' id=list.list_id %}">Edit {{ list.list_title }}</a>
+                    <a class = "linkbutton" href="{% url 'DeleteList' id=list.list_id %}">Delete {{ list.list_title }}</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    {# A Link to get to the top of the page #}
+    <br><br><a class="linktop" title="To Top of Page" href="#body_div">^</a>
+
+{% endblock %}

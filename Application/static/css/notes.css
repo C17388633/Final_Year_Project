@@ -1,0 +1,25 @@
+.notes_view {
+    width: 250px;
+    max-width: 250px;
+    display: inline-block;
+    background-color: white;
+    border: 2px black solid;
+    padding-left: 1% ;
+    padding-right: 1% ;
+    margin: auto;
+    vertical-align: top;
+    border-radius: 1em;
+}
+
+
+.notes_view p, h3{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.NoteLinks {
+    text-align: center;
+    margin: auto;
+}
+

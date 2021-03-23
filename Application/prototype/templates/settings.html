@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+    <h1> Settings </h1>
+    <br><br>
+    <button id="editFontStyle" type="button">Change Font Style</button>
+    <p>Test text just to see what it looks like now</p>
+    <script>
+        $("#editFontStyle").click(function() {
+            $("part2").css("fontFamily", "Arial, Helvetica, sans-serif");
+            $("body").css("fontSize", "14px");
+        });
+    </script>
+
+{% endblock %}

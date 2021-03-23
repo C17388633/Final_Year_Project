@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}Schedule{% endblock %}
+
+{% block content %}
+    <h1> Schedule </h1>
+    <p><a class = "linkbutton" href="{% url 'AddEvent' %}">Add New Event</a></p>
+    <form action="{% url 'SearchEvent' %}" method="get">
+        <label for="event_query" class="short_label"> Event: </label>
+        <input id="event_query" name="event_query" type="text" placeholder="Search event here.." >
+        <button class="FormButton" type="submit" name="button">Search for Event</button>
+    </form>
+    <br><br>
+
+    <h2>Current Events</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                1
+            </div>
+            <div class="col-sm">
+                2
+            </div>
+            <div class="col-sm">
+                3
+            </div>
+            <div class="col-sm">
+                4
+            </div>
+            <div class="col-sm">
+                5
+            </div>
+            <div class="col-sm">
+                6
+            </div>
+            <div class="col-sm">
+                7
+            </div>
+        </div>
+    </div>
+    <div class="accordion" id="EventAccordion">
+        {% for event in event_list %}
+        <div class="event_details">
+            <div class="card">
+                {# adjust colour of headers #}
+                {% if event.colour == "White (default)" %}
+                    <div class="card-header" id="EventHead">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                          <h3> {{ event.event_title }}</h3>
+                        </button>
+                    </div>
+                {% endif %}
+                {% if event.colour == "Red" %}
+                    <div class="card-header text-white" id="EventHead" style="background-color: red">
+                        <button class="btn btn-link collapsed text-white" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                          <h3> {{ event.event_title }}</h3>
+                        </button>
+                    </div>
+                {% endif %}
+                {% if event.colour == "Blue" %}
+                    <div class="card-header text-white" id="EventHead" style="background-color: blue">
+                        <button class="btn btn-link collapsed text-white" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                          <h3> {{ event.event_title }}</h3>
+                        </button>
+                    </div>
+                {% endif %}
+                {% if event.colour == "Yellow" %}
+                    <div class="card-header text-dark" id="EventHead" style="background-color: yellow">
+                        <button class="btn btn-link collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                          <h3> {{ event.event_title }}</h3>
+                        </button>
+                    </div>
+                {% endif %}
+                {% if event.colour == "Green" %}
+                    <div class="card-header text-white" id="EventHead" style="background-color: green">
+                        <button class="btn btn-link collapsed text-white" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                          <h3> {{ event.event_title }}</h3>
+                        </button>
+                    </div>
+                {% endif %}
+                {% if event.colour == "Purple" %}
+                    <div class="card-header text-white" id="EventHead" style="background-color: purple">
+                        <button class="btn btn-link collapsed text-white" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                          <h3> {{ event.event_title }}</h3>
+                        </button>
+                    </div>
+                {% endif %}
+                {% if event.colour == "Orange" %}
+                    <div class="card-header text-dark" id="EventHead" style="background-color: orange">
+                        <button class="btn btn-link collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                          <h3> {{ event.event_title }}</h3>
+                        </button>
+                    </div>
+                {% endif %}
+                {% if event.colour == "Pink" %}
+                    <div class="card-header text-dark" id="EventHead" style="background-color: pink">
+                        <button class="btn btn-link collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                          <h3> {{ event.event_title }}</h3>
+                        </button>
+                    </div>
+                {% endif %}
+                <div id="collapse{{ forloop.counter }}" class="collapse" aria-labelledby="EventHead" data-parent="#EventAccordion">
+                    <div class="card-body">
+                        <p>Description: {{ event.event_description }}</p>
+                        <p>Location: {{ event.location }}</p>
+                        <p>Starts at: {{ event.start_date }}</p>
+                        <p>Finishes at: {{ event.end_date }}</p>
+                        <br>
+                        <div class="EventLinks">
+                            <a class = "linkbutton" href="{% url 'EditEvent' id=event.event_id %}">Edit {{ event.event_title }}</a>
+                            <a class = "linkbutton" href="{% url 'DeleteEvent' id=event.event_id %}">Delete {{ event.event_title }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {# A Link to get to the top of the page #}
+    <br><br><a class="linktop" title="To Top of Page" href="#body_div">^</a>
+{% endblock %}

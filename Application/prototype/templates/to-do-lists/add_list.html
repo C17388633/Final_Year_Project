@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Add List{% endblock %}
+
+{% block content %}
+    <form method = 'POST'>
+        <h1>Add List</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="FormButton" type="submit" value = 'Add List'><br><br>
+        <p><a class = "linkbutton" href="{% url 'tasks' %}">Cancel</a></p>
+    </form>
+
+
+{% endblock %}
